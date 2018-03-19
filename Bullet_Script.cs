@@ -7,17 +7,8 @@ public class Bullet_Script : MonoBehaviour {
 	public float speed = 1;
 	public Vector3 direction;
 	public bool useInternalForward;
+	public int bouncesLeft = 3;
 
-	/* 
-	void Start (Vector3 inDirection, float inSpeed = 1, bool inUseInternalForward = false) {
-	 	direction = inDirection;
-	 	speed = inSpeed;
-	 	useInternalForward = inUseInternalForward;
-	} */
-
-	// Start() can't take parameters lol
-
-	//public void Fire(Vector3 inDirection, float inSpeed = 1, bool inUseInternalForward = false) {
 	public void Fire(Vector3 inDirection, float inSpeed = 1, bool inUseInternalForward = false) {
 		direction = inDirection;
 		speed = inSpeed;
@@ -28,5 +19,12 @@ public class Bullet_Script : MonoBehaviour {
 		if (useInternalForward)
 			direction = transform.forward;
 		transform.Translate(direction * speed); 
+	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		//if (bouncesLeft <= 0)
+			Destroy (gameObject);
+		//else
+		//	bouncesLeft -= 1;
 	}
 }
